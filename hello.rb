@@ -16,34 +16,36 @@ script do
 end
 
 script do
+  cls
+
   t = "🐣Hello, "
 
   wait(60) do |i|
-    text_at(t, Window.center.x, Window.center.y, 7)
+    text_at(t, Window.center.x, Window.center.y)
   end
 
   a = "ClipScript!".split("")
   a.each do |e|
     t += e
     wait(4) do 
-      text_at(t, Window.center.x, Window.center.y, 7)
+      text_at(t, Window.center.x, Window.center.y)
     end
   end
 
   t += "💃"
   wait(64) do 
-    text_at(t, Window.center.x, Window.center.y, 7)
+    text_at(t, Window.center.x, Window.center.y)
   end
 
   wait(120) do
-    text_at(t, Window.center.x, Window.center.y, 7)
-    text("Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam.", 0, 300, 7)
+    text_at(t, Window.center.x, Window.center.y)
+    text("Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam.", 0, 300)
   end
 end
 
 draw do
-  circfill(mouse_x, mouse_y, 30, 1)
-  circfill(mouse_x, mouse_y, 20, 2)
+  circfill(mouse_x, mouse_y, 30, :dark_blue)
+  circfill(mouse_x, mouse_y, 20, :dark_purple)
 end
 
 run

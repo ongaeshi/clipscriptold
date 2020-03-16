@@ -5,30 +5,38 @@ module Clipscript
   @@font = Font.new(30)
 
   COLORS = {
-    0 => [0, 0, 0, 255], # black
-    1 => [29, 43, 83, 255], # dark-blue
-    2 => [126, 37, 83, 255], # dark-purple
-    3 => [0, 135, 81, 255], # dark-green
-    0 => [0, 0, 0, 255], # black
-     1 => [29, 43, 83, 255], # dark-blue
-     2 => [126, 37, 83, 255], # dark-purple
-     3 => [0, 135, 81, 255], # dark-green
-     4 => [171, 82, 54, 255], # brown
-     5 => [95, 87, 79, 255], # dark-gray
-     6 => [194, 195, 199, 255], # light-gray
-     7 => [255, 241, 232, 255], # white
-     8 => [255, 0, 77, 255], # red
-     9 => [255, 163, 0, 255], # orange
-    10 => [255, 236, 39, 255], # yellow
-    11 => [0, 228, 54, 255], # green
-    12 => [41, 173, 255, 255], # blue
-    13 => [131, 118, 156, 255], # indigo
-    14 => [255, 119, 168, 255], # pink
-    15 => [255, 204, 170, 255],  # peach
+    :black => [0, 0, 0, 255],
+    :dark_blue => [29, 43, 83, 255],
+    :dark_purple => [126, 37, 83, 255],
+    :dark_green => [0, 135, 81, 255],
+    :brown => [171, 82, 54, 255],
+    :dark_gray => [95, 87, 79, 255],
+    :light_gray => [194, 195, 199, 255],
+    :white => [255, 241, 232, 255],
+    :red => [255, 0, 77, 255],
+    :orange => [255, 163, 0, 255],
+    :yellow => [255, 236, 39, 255],
+    :green => [0, 228, 54, 255],
+    :blue => [41, 173, 255, 255],
+    :indigo => [131, 118, 156, 255],
+    :pink => [255, 119, 168, 255],
+    :peach => [255, 204, 170, 255], 
   }
+
+  def cls(c = :light_gray)
+    Graphics.set_background(to_color(c))
+  end
 
   def set_color_hash(key, value)
     COLORS[key] = value
+  end
+
+  def to_color(c)
+    if c.is_a?(Symbol)
+      COLORS[c]
+    else
+      c
+    end
   end
 
   def hex_color(code)
@@ -40,12 +48,8 @@ module Clipscript
     ]
   end
 
-  def circfill(x, y, r = 4, col = 0)
-    if col.is_a?(Array)
-      Circle.new(x, y, r).draw(col)
-    else
-      Circle.new(x, y, r).draw(COLORS[col])
-    end
+  def circfill(x, y, r = 4, c = :black)
+    Circle.new(x, y, r).draw(to_color(c))
   end
 
   def mouse_x
@@ -56,12 +60,12 @@ module Clipscript
     Cursor.pos.y
   end
 
-  def text(str, x, y, col = 7)
-    @@font[str].draw(x, y, COLORS[col])
+  def text(str, x, y, c = :black)
+    @@font[str].draw(x, y, to_color(c))
   end
 
-  def text_at(str, x, y, col = 7)
-    @@font[str].draw_at(x, y, COLORS[col])
+  def text_at(str, x, y, c = :black)
+    @@font[str].draw_at(x, y, to_color(c))
   end
 
   def script(&block)
