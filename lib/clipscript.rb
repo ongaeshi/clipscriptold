@@ -27,6 +27,22 @@ module Clipscript
     Graphics.set_background(to_color(c))
   end
 
+  def circle(x, y, r = 30, c = :black, frame = 5)
+    Circle.new(x, y, r).draw_frame(frame, to_color(c))
+  end
+
+  def circle_fill(x, y, r = 30, c = :black)
+    Circle.new(x, y, r).draw(to_color(c))
+  end
+
+  def text(str, x, y, c = :black)
+    @@font[str].draw(x, y, to_color(c))
+  end
+
+  def text_at(str, x, y, c = :black)
+    @@font[str].draw_at(x, y, to_color(c))
+  end
+
   def set_color_hash(key, value)
     COLORS[key] = value
   end
@@ -48,10 +64,6 @@ module Clipscript
     ]
   end
 
-  def circfill(x, y, r = 4, c = :black)
-    Circle.new(x, y, r).draw(to_color(c))
-  end
-
   def mouse_x
     Cursor.pos.x
   end
@@ -60,12 +72,24 @@ module Clipscript
     Cursor.pos.y
   end
 
-  def text(str, x, y, c = :black)
-    @@font[str].draw(x, y, to_color(c))
+  def center_x
+    Window.center.x
   end
 
-  def text_at(str, x, y, c = :black)
-    @@font[str].draw_at(x, y, to_color(c))
+  def center_y
+    Window.center.y
+  end
+
+  def deg2rad(deg)
+    deg * (Math::PI * 2) / 360
+  end
+
+  def sin(rad)
+    Math::sin(rad)
+  end
+
+  def cos(rad)
+    Math::cos(rad)
   end
 
   def script(&block)
