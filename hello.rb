@@ -22,29 +22,31 @@ end
 script do
   cls
 
-  t = "🐣Hello, "
+  @m = Message.new(center_x, center_y)
+  @m2 = Message.new(0, 300)
 
-  wait(60) do |i|
-    text_at(t, center_x, center_y)
-  end
+  t = "🐣Hello, "
+  @m.text(t)
+  wait 60
 
   a = "ClipScript!".split("")
   a.each do |e|
     t += e
-    wait(4) do 
-      text_at(t, center_x, center_y)
-    end
+    @m.text(t)
+    wait 4
   end
 
   t += "💃"
-  wait(64) do 
-    text_at(t, center_x, center_y)
-  end
+  @m.text(t)
+  wait 64
 
-  wait(120) do
-    text_at(t, center_x, center_y)
-    text("Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam.", 0, 300)
-  end
+  @m2.text("Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam.")
+  wait 120
+end
+
+draw do
+  @m.draw_at
+  @m2.draw
 end
 
 run

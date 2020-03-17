@@ -23,6 +23,32 @@ module Clipscript
     :peach => [255, 204, 170, 255], 
   }
 
+  class Message
+    def initialize(x, y, w = 0, h = 0, speed = 0)
+      @x = x
+      @y = y
+      @w = w
+      @h = h
+      @speed = speed
+
+      @t = ""
+      @tc = :black
+    end
+
+    def text(t, c = :black)
+      @t = t
+      @tc = c
+    end
+
+    def draw
+      Clipscript::text(@t, @x, @y, @tc)
+    end
+
+    def draw_at
+      Clipscript::text_at(@t, @x, @y, @tc)
+    end
+  end
+
   def cls(c = :light_gray)
     Graphics.set_background(to_color(c))
   end
